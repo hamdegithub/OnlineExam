@@ -1,0 +1,40 @@
+.footer {
+    background-color: #3b455a;
+}
+
+.padding {
+    padding-top: 50px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+}
+
+.paddingl {
+    padding-top: 50px;
+    padding-bottom: 0px;
+    padding-left: 60px;
+}
+
+.hov {
+    color: white;
+}
+
+.hov > button:hover {
+    width: 10px;
+    color: lightblue;
+    text-decoration: underline;
+}
+
+.list-none {
+    list-style: none;
+    color: #8c9395;
+}
+
+.area {
+    padding-left: 65px;
+    padding-top: 0pc;
+}
+
+.sub:hover {
+    color: orange;
+    border: none;
+}

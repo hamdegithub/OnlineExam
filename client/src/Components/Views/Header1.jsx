@@ -2,9 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
 import './Header.css';
 import { UserContext } from '../Contexts/UserContext';
-import "./header1.css"
-// Importing Image
-// import logo from '../Imaiges/logo.png';
+import logo from "../Image/logo_1.jpeg"
 
 const Header1 = () => {
      const [userData, setUserData] = useContext(UserContext);
@@ -26,7 +24,41 @@ const Header1 = () => {
             ☰
           </button>
           
-          <ul class="main-nav">
+  
+            
+          </div>
+            <p className='word'>Welcome: {userData.user?.display_name}</p>
+            <header class="header">
+<div class="header-fixed">
+<nav class="navbar navbar-expand-lg header-nav scroll-sticky add-header-bg">
+<div class="container">
+<div class="navbar-header">
+<a id="mobile_btn" href="javascript:void(0);">
+<span class="bar-icon">
+<span></span>
+<span></span>
+<span></span>
+</span>
+</a>
+<Link to={"/"}class="navbar-brand logo">
+<img src={logo}  class="img-fluid" alt="Logo"/>
+</Link>
+<ul class="nav header-navbar-rht">
+<li class="nav-item">
+<a type="button"className="nav-link header-login mobile_btn  d-md-none d-block" onClick={logout}>{userData.user ? "LogOut" : "SIGN IN"}</a>
+</li>
+</ul>
+</div>
+<div class="main-menu-wrapper">
+<div class="menu-header">
+<a href="index.html" class="menu-logo">
+<img src={logo} class="img-fluid" alt="Logo"/>
+</a>
+<a id="menu_close" class="menu-close" href="javascript:void(0);">
+<i class="fas fa-times"></i>
+</a>
+</div>
+<ul class="main-nav">
   <li class="has-submenu active">
   <Link to={"/"}>Home</Link>
   
@@ -151,15 +183,20 @@ const Header1 = () => {
   <li class="has-submenu ">
   <Link to={'/ans_que'}>Ans_Que</Link>
   </li>
-  
-  <button className="btn_header " onClick={logout}>{userData.user ? "LogOut" : "SIGN IN"}</button>
-  
+
   
   </ul>
-            
-          </div>
-            <p className='word'>Welcome: {userData.user?.display_name}</p>
-          
+</div>
+<div className='word'>Welcome: {userData.user?.display_name}</div>
+<ul class="nav navbar-header  header-navbar-rht">
+<li class="nav-item">
+<a type='button' className="nav-link header-login d-none d-md-block " onClick={logout}>{userData.user ? "LogOut" : "SIGN IN"}</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="sidebar-overlay"></div></div>
+</header>
           </div>
   
     );
