@@ -68,7 +68,7 @@ const AdminSignin = () => {
   }, [userData.user, navigate]);
 
   const HandleIconChange = () => {
-    // event listen for Password function
+    // event listenforPassworder function
     if (type === "password") {
       setIcon(eye);
       setType("text");
@@ -143,19 +143,10 @@ const AdminSignin = () => {
               }}
             />
 
-            <input
-              type="password"
-              placeholder="password"
-              className="in11 me-1"
-              value={pass}
-              onChange={(e) => {
-                setpass(e.target.value);
-                handleChange();
-              }}
-            />
-            <span className="showHides">
-              <Icon icon={icon} size={20} onClick={HandleIconChange} />
-            </span>
+           <input className="in1" type={type} name="password" onChange={handleChange } placeholder="Your Password" />
+               <span onClick={HandleIconChange} className="showHide2">
+                 <Icon icon={icon} size={20} />
+              </span>
             <button className="btnSign">Agree and Join</button>
           </form>
           <div class="google-bg text-center">

@@ -29,8 +29,11 @@ const Header = () => {
         </button>
         <div className="d-flex  innerContainer2 justify-content-between d-none d-md-block">
           <Link to="/">Home</Link>
-          <Link to="/">How it Works</Link>
+          <Link to="/about">How it Works</Link>
+          <Link to="/">
           <button className="btn_header" onClick={logout}>{userData.user ? "LogOut" : "SIGN IN"}</button>
+
+          </Link>
         </div>
       </div>
     </div>

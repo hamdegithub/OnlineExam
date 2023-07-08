@@ -41,7 +41,7 @@ const BiologyOnline = () => {
   };
   const showToastMessage = () => {
     toast.success('Successfully Added !', {
-        position: toast.POSITION.BOTTOM_RIGHT_RIGHT
+        position: toast.POSITION.TOP_RIGHT
     });
 };
   return (
@@ -76,9 +76,9 @@ const BiologyOnline = () => {
               name="title"
               placeholder="Question"
               onChange={handleChange}
-            /><br/>
+              required /><br/>
             <label for="year">Enter Choice A:</label> 
-            <input style={{
+            <input  style={{
             width: "500px",
             height: "40px",
             borderRadius:"12px"
@@ -90,7 +90,7 @@ const BiologyOnline = () => {
               name="a"
               placeholder="A"
               onChange={handleChange}
-            /><br/>
+              required/><br/>
             <label for="year">Enter Choice B:</label> 
             <input style={{
             width: "500px",
@@ -104,7 +104,7 @@ const BiologyOnline = () => {
               name="b"
               placeholder="B"
               onChange={handleChange}
-            /><br/>
+              required /><br/>
             <label for="year">Enter choice C:</label> 
             <input style={{
             width: "500px",
@@ -118,7 +118,7 @@ const BiologyOnline = () => {
               name="c"
               placeholder="C"
               onChange={handleChange}
-            /><br/>
+              required /><br/>
           <label for="year">Enter Choice D:</label> 
             <input style={{
             width: "500px",
@@ -131,10 +131,10 @@ const BiologyOnline = () => {
               type="text"
               name="d"
               placeholder="D"
-              onChange={handleChange}
+              onChange={handleChange} required
             /><br/>
           <label for="year">Enter Answer:</label> 
-    <select style={{
+    <select required style={{
             width: "500px",
             height: "40px",
             borderRadius:"12px"

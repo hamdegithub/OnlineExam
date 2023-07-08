@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./Question.css";
+import Axios from "../../../../../Axios";
 import Edit from "./Edit";
 
 function QuestionDetail({ question, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
-  
+  const  axios=Axios()
   const handleDelete = () => {
-    // Perform the delete request and handle the response
-    onDelete(question.pastquestion_id);
+    axios
+      .delete(`/api/pastquestion/deletequestion${question.pastquestion_id}`)
+      .then((response) => {
+        // Assuming the delete request is successful
+        // You can remove the question from the UI or perform any necessary updates
+        console.log("Question deleted");
+        onDelete(question.pastquestion_id); // Notify parent component to remove the question from the UI
+      })
+      .catch((error) => {
+        // Handle error if the delete request fails
+        console.error("Error deleting question:", error);
+      });
   };
 
 

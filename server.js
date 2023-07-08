@@ -2,10 +2,12 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors"); //
 const app = express();
+const path = require('path');
 const port = process.env.PORT;
 const adminRouter = require("./server/api/admins/admin.router")
 const userRouter = require("./server/api/users/user.router");
 const pastquestionRouter = require("./server/api/pastquestion/question.router");
+const booksRouter = require("./server/api/books/books.router");
 const biologyRouter = require("./server/api/biology/question.router");
 const chemistryRouter = require("./server/api/chemistry/question.router");
 const civicsRouter = require("./server/api/civics/question.router");
@@ -23,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/api/admins", adminRouter);
 app.use("/api/users", userRouter);
+app.use("/api/books", booksRouter);
 app.use("/api/pastquestion", pastquestionRouter);
 app.use("/api/biology", biologyRouter);
 app.use("/api/maths", mathsRouter);
@@ -36,5 +39,5 @@ app.use("/api/physics", physicsRouter);
 app.use("/api/question", questionRouter);
 app.use("/api/answer", answerRouter);
 app.use("/api/answer", answerRouter);
-
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`)); //

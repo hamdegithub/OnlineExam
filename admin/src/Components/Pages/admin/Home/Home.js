@@ -4,8 +4,8 @@ import { UserContext } from "../../../Contexts/UserContext";
 import QuestionDetail from "../../Question/QuestionDetail";
 import Axios from "../../../../Axios";
 import "./Home.css";
-import MainSection from "../../MainSection/MainSection";
-
+import MainSection from "../MainSection/MainSection";
+import home from "../../../Image/Web.png"
 const Home = () => {
   const [userData] = useContext(UserContext);
   const [questions, setQuestions] = useState([]);
@@ -45,7 +45,7 @@ const Home = () => {
 
   return (
    
-       <MainSection/>
+       <MainSection logo={home}/>
     
     
   );

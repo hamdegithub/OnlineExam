@@ -28,7 +28,7 @@ const PhysicsAdmin = () => {
   useEffect(() => {
     if (questions.length > 0) {
       setAnswers(Array(questions.length).fill(""));
-      setTimer(questions.length*120)
+      setTimer(questions.length*150)
     }
   }, [questions]);
 
@@ -43,11 +43,7 @@ const PhysicsAdmin = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (timer <= 0) {
-      handleSubmit();
-    }
-  }, [timer]);
+  
 
   // Convert the remaining time to hours, minutes, and seconds
   const hours = Math.floor(timer / 3600);
@@ -103,14 +99,7 @@ const PhysicsAdmin = () => {
     return (
       <>
         <div className="timer-container">
-          <h2 className="timer">
-            {`${hours.toString().padStart(2, "0")}:${minutes
-              .toString()
-              .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`}
-          </h2>
-          {hours === 0 && minutes < 10 && (
-            <Alert variant="warning">Less than 10 minutes remaining!</Alert>
-          )}
+        
         </div>
         <div>
           <h3>Question </h3>

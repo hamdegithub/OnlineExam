@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { UserContext } from "../../../../Contexts/UserContext";
 import Axios from "../../../../../Axios";
 // import "./question.css";
@@ -34,12 +36,17 @@ const NewQuestion = () => {
       );
       e.target.reset();
       navigate("/past_que");
+      showToastMessage()
     } catch (err) {
       console.log("problem", err.response.data.msg);
       alert(err.response.data.msg);
     }
   };
-
+  const showToastMessage = () => {
+    toast.success('Successfully Added !', {
+        position: toast.POSITION.TOP_RIGHT
+    });
+};
   return (
     <section className="container" style={{ paddingTop: "10px" }}>
       <div className="d-flex flex-column  ">
@@ -59,7 +66,7 @@ const NewQuestion = () => {
         <form method="post" onSubmit={handleSubmit}>
           <div style={{ width: "100%" }}>
           <label for="year">Enter Year :</label> 
-    <select style={{
+    <select required style={{
             width: "520px",
             height: "40px",
             borderRadius:"12px"
@@ -87,7 +94,7 @@ const NewQuestion = () => {
               name="qn"
               placeholder="Question No"
               onChange={handleChange}
-            /><br/>
+              required/><br/>
 
 <label for="year">Enter Subject :</label> 
     <select style={{
@@ -96,7 +103,7 @@ const NewQuestion = () => {
             borderRadius:"12px"
             ,margin:"2px 20px"
             
-          }} onChange={handleChange} name="subject" id="dog-names"> 
+          }} onChange={handleChange} name="subject" id="dog-names" required> 
         <option value="">Subject</option> 
         <option value="biology">Biology</option> 
         <option value="maths">Maths</option> 
@@ -121,7 +128,7 @@ const NewQuestion = () => {
               name="title"
               placeholder="Question"
               onChange={handleChange}
-            /><br/>
+              required/><br/>
             <label for="year">Enter Choice A:</label> 
             <input style={{
             width: "500px",
@@ -135,7 +142,7 @@ const NewQuestion = () => {
               name="a"
               placeholder="A"
               onChange={handleChange}
-            /><br/>
+              required/><br/>
             <label for="year">Enter Choice B:</label> 
             <input style={{
             width: "500px",
@@ -149,7 +156,7 @@ const NewQuestion = () => {
               name="b"
               placeholder="B"
               onChange={handleChange}
-            /><br/>
+              required/><br/>
             <label for="year">Enter choice C:</label> 
             <input style={{
             width: "500px",
@@ -163,7 +170,7 @@ const NewQuestion = () => {
               name="c"
               placeholder="C"
               onChange={handleChange}
-            /><br/>
+              required/><br/>
           <label for="year">Enter Choice D:</label> 
             <input style={{
             width: "500px",
@@ -177,7 +184,7 @@ const NewQuestion = () => {
               name="d"
               placeholder="D"
               onChange={handleChange}
-            /><br/>
+              required/><br/>
           <label for="year">Enter Answer:</label> 
     <select style={{
             width: "500px",
@@ -185,7 +192,7 @@ const NewQuestion = () => {
             borderRadius:"12px"
             ,margin:"2px 20px"
             
-          }} onChange={handleChange} name="answer" id="dog-names"> 
+          }} onChange={handleChange} name="answer" id="dog-names" required> 
         <option maxLength="200" value="">Answer         </option> 
         <option maxLength="200" value="A">A</option> 
         <option maxLength="200" value="B">B</option> 
@@ -222,6 +229,7 @@ const NewQuestion = () => {
               >
                 submit Question
               </button>
+              <ToastContainer />
             </div>
           </div>
         </form>

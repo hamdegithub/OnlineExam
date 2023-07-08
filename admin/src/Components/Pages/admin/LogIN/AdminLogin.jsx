@@ -67,7 +67,7 @@ function AdminLogin({ showSignUp}) {
     <MainSection/>
     </div>
     
-    <div class="col-md-6 login-wrap-bg">
+    <div class="col-md-6  login-wrap-bg d-md-block d-none">
     
     <div class="login-wrapper">
     <div class="loginbox">

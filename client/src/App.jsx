@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import { UserContext } from './Components/Contexts/UserContext';
 import { Routes, Route,} from 'react-router-dom';
 import axios from 'axios';
-
 import Home from './Components/Pages/Home/Home';
 import Footer from './Components/Views/Footer';
 import Header from './Components/Views/Header';
@@ -69,6 +68,7 @@ import Civics from './Components/Pages/Online/Civics/Civics';
 import Social from './Components/Pages/Online/Social/Social';
 import English from './Components/Pages/Online/English/English';
 import NotFoundPage from './Components/Views/NotFoundPage';
+import About from './Components/Pages/About/About';
 
 const App = () => {
   const [userData, setUserData] = useContext(UserContext);
@@ -142,6 +142,14 @@ const App = () => {
                          <>
                          <Header1 logout={logout} />
                          <Biology2019 />
+                         </>
+         } />
+
+
+      <Route path="/about" element={
+                         <>
+                         <Header logout={logout} />
+                         <About />
                          </>
          } />
 

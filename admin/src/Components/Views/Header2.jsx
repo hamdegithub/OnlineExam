@@ -217,6 +217,9 @@ const Header1 = () => {
   <li class="has-submenu">
   <Link to={'/past_que'}>Add PastQue</Link>
   </li>
+  <li class="has-submenu">
+  <Link to={'/books'}>Add Books</Link>
+  </li>
   <li class="has-submenu ">
   <Link to={'/ans_que'}>Ans_Que</Link>
   </li>

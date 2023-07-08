@@ -2,6 +2,7 @@ const {
   askQuestion,
   getQuestions,
   getquestionbyid,
+  deleteQuestion,
 } = require("./question.service");
 
 module.exports = {
@@ -54,6 +55,21 @@ module.exports = {
       } else {
         return res.status(200).json({ data: results[0] });
       }
+    });
+  },
+  deleteQuestion: (req, res) => {
+    const { id } = req.params;
+
+    // Delete the question from the database
+    deleteQuestion(id, (err, results) => {
+      if (err) {
+        console.error("Error deleting question:", err);
+        return res.status(500).json({ msg: "Database connection error" });
+      }
+      return res.status(200).json({
+        msg: "Question deleted successfully",
+        data: results,
+      });
     });
   },
 };

@@ -28,7 +28,7 @@ const AfanOromoAdmin = () => {
   useEffect(() => {
     if (questions.length > 0) {
       setAnswers(Array(questions.length).fill(""));
-      setTimer(questions.length*120)
+      setTimer(questions.length*60)
     }
   }, [questions]);
 
@@ -103,14 +103,8 @@ const AfanOromoAdmin = () => {
     return (
       <>
         <div className="timer-container">
-          <h2 className="timer">
-            {`${hours.toString().padStart(2, "0")}:${minutes
-              .toString()
-              .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`}
-          </h2>
-          {hours === 0 && minutes < 10 && (
-            <Alert variant="warning">Less than 10 minutes remaining!</Alert>
-          )}
+          
+          
         </div>
         <div>
           <h3>Question </h3>

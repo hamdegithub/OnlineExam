@@ -17,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     if (!userData.user) {
-      navigate("/login");
+      navigate("/adminlogin");
     } else {
       loadQuestions();
     }

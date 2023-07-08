@@ -1,14 +1,17 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { UserContext } from "../../../../Contexts/UserContext";
 import Axios from "../../../../../Axios";
-// import "./question.css";
-const BiologyOnline = () => {
+import "./Question.css";
+const SocialOnline = () => {
   const [userData] = useContext(UserContext);
   const axios = Axios();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({});
+  const [err, setErr] = useState("");
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -30,12 +33,17 @@ const BiologyOnline = () => {
       );
       e.target.reset();
       navigate("/onlinesoc");
+      showToastMessage();
     } catch (err) {
       console.log("problem", err.response.data.msg);
-      alert(err.response.data.msg);
+      setErr(err.response.data.msg);
     }
   };
-
+  const showToastMessage = () => {
+    toast.success('Successfully Added !', {
+        position: toast.POSITION.TOP_RIGHT
+    });
+};
   return (
     <section className="container" style={{ paddingTop: "10px" }}>
       <div className="d-flex flex-column  ">
@@ -50,8 +58,9 @@ const BiologyOnline = () => {
             fontWeight: "bold",
           }}
         >
-          <h3>Add Social Sciences Online Exam Questions</h3>
+          <h3>Add Social Online Exam Questions</h3>
         </div>
+        <div className="text-center color-danger">{err}</div>
         <form method="post" onSubmit={handleSubmit}>
           <div style={{ width: "100%" }}>
     <label for="year">Enter Question:</label> 
@@ -67,7 +76,7 @@ const BiologyOnline = () => {
               name="title"
               placeholder="Question"
               onChange={handleChange}
-            /><br/>
+            required/><br/>
             <label for="year">Enter Choice A:</label> 
             <input style={{
             width: "500px",
@@ -81,7 +90,7 @@ const BiologyOnline = () => {
               name="a"
               placeholder="A"
               onChange={handleChange}
-            /><br/>
+            required/><br/>
             <label for="year">Enter Choice B:</label> 
             <input style={{
             width: "500px",
@@ -95,7 +104,7 @@ const BiologyOnline = () => {
               name="b"
               placeholder="B"
               onChange={handleChange}
-            /><br/>
+            required/><br/>
             <label for="year">Enter choice C:</label> 
             <input style={{
             width: "500px",
@@ -109,7 +118,7 @@ const BiologyOnline = () => {
               name="c"
               placeholder="C"
               onChange={handleChange}
-            /><br/>
+            required/><br/>
           <label for="year">Enter Choice D:</label> 
             <input style={{
             width: "500px",
@@ -123,7 +132,7 @@ const BiologyOnline = () => {
               name="d"
               placeholder="D"
               onChange={handleChange}
-            /><br/>
+            required/><br/>
           <label for="year">Enter Answer:</label> 
     <select style={{
             width: "500px",
@@ -155,6 +164,7 @@ const BiologyOnline = () => {
               >
                 submit Question
               </button>
+              <ToastContainer />
             </div>
           </div>
         </form>
@@ -163,4 +173,4 @@ const BiologyOnline = () => {
   );
 };
 
-export default BiologyOnline;
+export default SocialOnline;

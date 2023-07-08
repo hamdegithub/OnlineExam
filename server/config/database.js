@@ -40,6 +40,14 @@ let profile = `CREATE TABLE if not exists profile(
     PRIMARY KEY (user_profile_id),
     FOREIGN KEY (user_id) REFERENCES registration(user_id)
 )`;
+let books = `CREATE TABLE if not exists books(
+    id int auto_increment,
+    title varchar(200)not null,
+    image varchar(65535) not null,
+    pdf varchar(200) not null,
+    time DateTime not null,
+    PRIMARY KEY (id)
+)`;
 let pastquestion = `CREATE TABLE if not exists pastquestion(
     pastquestion_id int auto_increment,
     year varchar(200)not null,
@@ -55,6 +63,9 @@ let pastquestion = `CREATE TABLE if not exists pastquestion(
     time DateTime not null,
     PRIMARY KEY (pastquestion_id)
 )`;
+
+
+
 let biology = `CREATE TABLE if not exists biology(
     onlinequestion_id int auto_increment,
     title varchar(200) not null,
@@ -194,6 +205,10 @@ pool.query(profile, (err, results) => {
 pool.query(pastquestion , (err, results) => {
   if (err) throw err;
   console.log("adminquestion  table created");
+});
+pool.query(books, (err, results) => {
+  if (err) throw err;
+  console.log("Books  table created");
 });
 pool.query(biology , (err, results) => {
   if (err) throw err;

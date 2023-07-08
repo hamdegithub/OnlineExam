@@ -77,7 +77,7 @@ import AmharicAdmin from './Components/Pages/admin/Online/Amharic/AmharicAdmin';
 import SocialAdmin from './Components/Pages/admin/Online/Social/SocialAdmin';
 import CivicsAdmin from './Components/Pages/admin/Online/Civics/CivicsAdmin';
 import EnglishAdmin from './Components/Pages/admin/Online/English/EnglishAdmin';
-
+import Books from './Components/Pages/admin/Books/Books';
 
 const App = () => {
   const [userData, setUserData] = useContext(UserContext);
@@ -561,6 +561,12 @@ const App = () => {
                          <>
                          <Header2 logout={logout} />
                          <Socialadmin2023/>
+                         </>
+         } />
+          <Route path="/books" element={
+                         <>
+                         <Header2 logout={logout} />
+                         <Books/>
                          </>
          } />
 

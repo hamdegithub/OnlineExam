@@ -4,7 +4,7 @@ import { UserContext } from "../../Contexts/UserContext";
 import QuestionDetail from "../Question/QuestionDetail";
 import Axios from "../../../Axios";
 import "./Home.css";
-import logoo from "../../Image/bro.png"
+import logoo from "../../Image/Web.png"
 import MainSection from "../MainSection/MainSection";
 
 const Home = () => {

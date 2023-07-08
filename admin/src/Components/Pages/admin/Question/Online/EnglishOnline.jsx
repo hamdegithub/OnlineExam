@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../../Contexts/UserContext";
 import Axios from "../../../../../Axios";
 // import "./question.css";
-const BiologyOnline = () => {
+const EnglishOnline = () => {
   const [userData] = useContext(UserContext);
   const axios = Axios();
   const navigate = useNavigate();
@@ -67,7 +67,7 @@ const BiologyOnline = () => {
               name="title"
               placeholder="Question"
               onChange={handleChange}
-            /><br/>
+            required/><br/>
             <label for="year">Enter Choice A:</label> 
             <input style={{
             width: "500px",
@@ -81,7 +81,7 @@ const BiologyOnline = () => {
               name="a"
               placeholder="A"
               onChange={handleChange}
-            /><br/>
+            required/><br/>
             <label for="year">Enter Choice B:</label> 
             <input style={{
             width: "500px",
@@ -95,7 +95,7 @@ const BiologyOnline = () => {
               name="b"
               placeholder="B"
               onChange={handleChange}
-            /><br/>
+            required/><br/>
             <label for="year">Enter choice C:</label> 
             <input style={{
             width: "500px",
@@ -109,7 +109,7 @@ const BiologyOnline = () => {
               name="c"
               placeholder="C"
               onChange={handleChange}
-            /><br/>
+            required/><br/>
           <label for="year">Enter Choice D:</label> 
             <input style={{
             width: "500px",
@@ -123,7 +123,7 @@ const BiologyOnline = () => {
               name="d"
               placeholder="D"
               onChange={handleChange}
-            /><br/>
+            required/><br/>
           <label for="year">Enter Answer:</label> 
     <select style={{
             width: "500px",
@@ -163,4 +163,4 @@ const BiologyOnline = () => {
   );
 };
 
-export default BiologyOnline;
+export default EnglishOnline;

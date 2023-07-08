@@ -29,9 +29,6 @@ const Biology2019= () => {
     setQuestions(response.data?.data);
   }
 
-  const handleClick = () => {
-    navigate("/newquestion");
-  };
 
   useEffect(() => {
     setFilterData(

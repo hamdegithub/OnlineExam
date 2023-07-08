@@ -8,7 +8,7 @@ function QuestionDetail({ question }) {
   };
   return (
     <div className="">
-      <p> <span className="mr-2">{question.qn})</span><h4>{question.title}</h4></p>
+      <p> <h4><span className="mr-2">{question.qn})</span> {question.title}</h4></p>
       <div className="">
       <span className="ml-3">A)</span>
       <span className="ml-1" >{question.a}</span><br/>

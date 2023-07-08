@@ -28,7 +28,7 @@ const BiologyAdmin = () => {
   useEffect(() => {
     if (questions.length > 0) {
       setAnswers(Array(questions.length).fill(""));
-      setTimer(questions.length*120)
+      setTimer(questions.length*60)
     }
   }, [questions]);
 
@@ -43,11 +43,7 @@ const BiologyAdmin = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (timer <= 0) {
-      handleSubmit();
-    }
-  }, [timer]);
+ 
 
   // Convert the remaining time to hours, minutes, and seconds
   const hours = Math.floor(timer / 3600);
@@ -65,6 +61,14 @@ const BiologyAdmin = () => {
       console.error("Error loading questions:", error);
     }
   }
+  
+  const handleUpdate = (questionId) => {
+    // Remove the deleted question from the questions array
+    const updatedQuestions = questions.filter(
+      (question) => question.onlinequestion_id !== questionId
+    );
+    setQuestions(updatedQuestions);
+  };
 
   const handleNextQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -99,18 +103,22 @@ const BiologyAdmin = () => {
 
   const renderQuestionPage = () => {
     const currentQuestion = questions[currentQuestionIndex];
-
+    const handleDelete = () => {
+      axios
+        .delete(`/api/biology/deletequestion${currentQuestion.onlinequestion_id}`)
+        .then((response) => {
+          loadQuestions()
+          renderQuestionPage()
+        })
+        .catch((error) => {
+          // Handle error if the delete request fails
+          console.error("Error deleting question:", error);
+        });
+    };
     return (
       <>
         <div className="timer-container">
-          <h2 className="timer">
-            {`${hours.toString().padStart(2, "0")}:${minutes
-              .toString()
-              .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`}
-          </h2>
-          {hours === 0 && minutes < 10 && (
-            <Alert variant="warning">Less than 10 minutes remaining!</Alert>
-          )}
+         
         </div>
         <div>
           <h3>Question </h3>
@@ -172,11 +180,18 @@ const BiologyAdmin = () => {
                     D) {currentQuestion.d}
                   </h5>
                 </div>
+
+                <div className="form-check choice">
+                  <h5 className="form-check-label">
+                    Answer:- {currentQuestion.answer}
+                  </h5>
+                </div>
               
             
           </div>
         </div>
         <div className="button-container">
+
           <Button
             variant="secondary"
             disabled={currentQuestionIndex === 0}
@@ -184,6 +199,9 @@ const BiologyAdmin = () => {
           >
             Previous
           </Button>
+          <div>
+          <Button onClick={handleDelete} variant="danger">Delete</Button>
+          {/* <Button  variant="blue" >Edit</Button> */}
           {currentQuestionIndex === questions.length - 1 ? (
             <Button
               variant="primary"
@@ -196,7 +214,9 @@ const BiologyAdmin = () => {
             <Button variant="primary" onClick={handleNextQuestion}>
               Next
             </Button>
+            
           )}
+          </div>
         </div>
       </>
     );

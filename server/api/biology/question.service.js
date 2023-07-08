@@ -41,6 +41,18 @@ server/api/biology/question.service.js      }
       }
     );
   },
+  deleteQuestion: (onlinequestion_id, callback) => {
+    pool.query(
+      `DELETE FROM biology WHERE onlinequestion_id=?`,
+      [onlinequestion_id],
+      (err, result) => {
+        if (err) {
+          return callback(err);
+        }
+        return callback(null, result);
+      }
+    );
+  },
 };
 // const pool = require("../../config/database");
 

@@ -159,6 +159,16 @@ const Header1 = () => {
 </ul>
 </li>
 <li class="has-submenu">
+<a >Amharic</a>
+<ul class="submenu">
+<li><Link to={"/amh19_que"}>2019</Link></li>
+<li><Link to={"/amh20_que"}>2020</Link></li>
+<li><Link to={"/amh21_que"}>2021</Link></li>
+<li><Link to={"/amh22_que"}>2022</Link></li>
+<li><Link to={"/amh23_que"}>2023</Link></li>
+</ul>
+</li>
+<li class="has-submenu">
 <a >Afan Oromo</a>
 <ul class="submenu">
 <li><Link to={"/oro19_que"}>2019</Link></li>
