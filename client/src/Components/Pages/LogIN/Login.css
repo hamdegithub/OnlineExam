@@ -111,10 +111,17 @@ h1 {
 .showHide2 {
 	display: flex;
 	justify-content: flex-end;
-	margin: -59px 25px 0px 360px;
+	margin: -19px 25px 0px 360px;
 	opacity: 0.65;
 	cursor: pointer;
 }
 .mt-500{
 	margin-top: 500px;
 }
+ @media only screen and (max-width: 700px) {
+	.showHide2 {
+		margin: -19px 105px 0px 60px;
+ 	}
+
+ 	
+ }

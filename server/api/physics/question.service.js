@@ -41,5 +41,17 @@ server/api/physics/question.service.js      }
       }
     );
   },
+  deleteQuestion: (onlinequestion_id, callback) => {
+    pool.query(
+      `DELETE FROM physics WHERE onlinequestion_id=?`,
+      [onlinequestion_id],
+      (err, result) => {
+        if (err) {
+          return callback(err);
+        }
+        return callback(null, result);
+      }
+    );
+  },
 };
 

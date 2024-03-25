@@ -9,6 +9,7 @@ const {
   getBooks,
   getbooksbyid,
   deleteBooks,
+  editBooks,
 } = require("./books.controller");
 const storage = multer.diskStorage({
   destination:(req,file,callback)=>{
@@ -27,6 +28,7 @@ router.post("/createBooks", upload.fields([{ name: 'pdf' }, { name: 'image' }]),
 // Route for getting all books
 router.get("/getBooks", getBooks);
 router.delete("/deletebooks:id", deleteBooks);
+router.put("/editbooks:id", upload.fields([{ name: 'pdf' }, { name: 'image' }]), editBooks);
 // Route for getting books by ID
 router.get("/getbooksbyid", getbooksbyid);
 

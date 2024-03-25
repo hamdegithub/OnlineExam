@@ -5,8 +5,7 @@ const pool = mysql.createPool({
   user: "root",
   password: "",
   database: "group",
-  connectionLimit: 10,
-
+  connectionLimit: 10
 });
 let adminRegistration = `CREATE TABLE if not exists adminregistration(
     admin_id int auto_increment,
@@ -43,6 +42,7 @@ let profile = `CREATE TABLE if not exists profile(
 let books = `CREATE TABLE if not exists books(
     id int auto_increment,
     title varchar(200)not null,
+    chapter varchar(200)not null,
     image varchar(65535) not null,
     pdf varchar(200) not null,
     time DateTime not null,

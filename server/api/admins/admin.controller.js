@@ -1,6 +1,7 @@
 const {
   register,
   adminById,
+  getAllAdmins,
   getadminByEmail,
   profile,
 } = require("./admin.service");
@@ -77,7 +78,7 @@ module.exports = {
                   }
                   return res.status(200).json({
                     msg: "New admin added successfully",
-                    data: results,
+                    data: results
                   });
                 });
               }
@@ -86,6 +87,15 @@ module.exports = {
         }
       }
     );
+  },
+  getAdmins: (req, res) => {
+    getAllAdmins((err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({ msg: "database connection err" });
+      }
+      return res.status(200).json({ data: results });
+    });
   },
   getadminById: (req, res) => {
     //getting req.id from auth middleware
@@ -128,18 +138,17 @@ module.exports = {
 
       //creating token for the signed admin that expires in 1 hour and using our secret key for creation
       const token = jwt.sign({ id: results.user_id }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
+        expiresIn: "1h"
       });
-
 
       //returning token and user-info
       return res.json({
         token,
         user: {
           id: results.user_id,
-          display_name: results.user_name,
-        },
+          display_name: results.user_name
+        }
       });
     });
-  },
+  }
 };

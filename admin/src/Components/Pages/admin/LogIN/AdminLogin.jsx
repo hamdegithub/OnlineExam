@@ -1,15 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../Contexts/UserContext";
-import Axios from "../../../../Axios";
+
 import { useNavigate ,Link} from "react-router-dom";
 import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import MainSection from "../../MainSection/MainSection"
 import "./Login.css"
+import axios from "axios";
 function AdminLogin({ showSignUp}) {
   const [userData, setUserData] = useContext(UserContext);
-  const axios = Axios();
   const navigate = useNavigate();
   const [form, setForm] = useState({});
   const [type, setType] = useState("password");
@@ -23,7 +23,7 @@ function AdminLogin({ showSignUp}) {
     e.preventDefault();
     try {
       //sending user data to database to be logged in
-      const loginRes = await axios.post("/api/admins/login", {
+      const loginRes = await axios.post("http://localhost:5000/api/admins/login", {
         email: form.email,
         password: form.password,
       });
@@ -47,6 +47,12 @@ function AdminLogin({ showSignUp}) {
       alert("Error :" + err.response.data.msg);
     }
   };
+  useEffect(
+    () => {
+      if (userData.user) navigate("/");
+    },
+    [userData.user, navigate]
+  );
 
   const HandleIconChange = () => {
     // event listenforPassworder function

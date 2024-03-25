@@ -6,11 +6,11 @@
 
 // module.exports = {
 //   createBooks: (req, res) => {
-//     const { title, owner } = req.body;
+//     const { title, chapter } = req.body;
 //     const { pdf, image } = req.files;
 
 //     //validation
-//     if (!title || !owner || !pdf || !image)
+//     if (!title || !chapter || !pdf || !image)
 //       return res
 //         .status(400)
 //         .json({ msg: "Not all fields have been provided!" });
@@ -63,15 +63,16 @@ const {
   getBooks,
   getbooksbyid,
   deleteBooks,
+  editBooks,
 } = require("./books.service");
 
 module.exports = {
   createBooks: (req, res) => {
-    const { user_id, title, owner } = req.body;
+    const { user_id, title, chapter } = req.body;
     const { pdf, image } = req.files;
 
     // Validation
-    if (!title || !owner || !pdf || !image) {
+    if (!title || !chapter || !pdf || !image) {
       return res.status(400).json({ msg: "Not all fields have been provided!" });
     }
     if (title.length > 200) {
@@ -82,7 +83,7 @@ module.exports = {
       body: {
       
         title,
-        owner,
+        chapter,
       },
       files: {
         pdf,
@@ -103,6 +104,7 @@ module.exports = {
   },
 
   getBooks: (req, res) => {
+    
     getBooks((err, results) => {
       if (err) {
         console.log(err);
@@ -116,7 +118,7 @@ module.exports = {
     });
   },
   getbooksbyid: (req, res) => {
-    getbooksbyid(req.query.books_id, (err, results) => {
+    getbooksbyid(req.query.id, (err, results) => {
       if (err) {
         console.log(err);
         return res.status(500).json({ msg: "database connection err" });
@@ -126,6 +128,38 @@ module.exports = {
       } else {
         return res.status(200).json({ data: results[0] });
       }
+    });
+  },
+  editBooks: (req, res) => {
+    const { user_id, title, chapter } = req.body;
+    const { pdf, image } = req.files;
+    if (!title || !chapter || !pdf || !image) {
+      return res.status(400).json({ msg: "Not all fields have been provided!" });
+    }
+    if (title.length > 200) {
+      return res.status(400).json({ msg: "Title length cannot be greater than 200 characters!" });
+    }
+
+    const data = {
+      body: {
+      
+        title,
+        chapter,
+      },
+      files: {
+        pdf,
+        image,
+      },
+    };
+    editBooks(data, (err, results) => {
+      if (err) {
+        console.error("Error editing Books:", err);
+        return res.status(500).json({ msg: "Database connection error" });
+      }
+      return res.status(200).json({
+        msg: "Books updated successfully",
+        data: results,
+      });
     });
   },
   deleteBooks: (req, res) => {
@@ -142,5 +176,6 @@ module.exports = {
         data: results,
       });
     });
-  },// Rest of the code...
+  },
+  // Rest of the code...
 };

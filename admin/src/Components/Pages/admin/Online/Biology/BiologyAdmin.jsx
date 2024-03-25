@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../../Contexts/UserContext";
 import Axios from "../../../../../Axios";
 import { Alert, Button, Col, Row } from "react-bootstrap";
+import { ToastContainer, toast } from 'react-toastify';
 import "../online.css"; 
-
+import 'react-toastify/dist/ReactToastify.css';
 const BiologyAdmin = () => {
   const [userData] = useContext(UserContext);
   const [questions, setQuestions] = useState([]);
@@ -19,7 +20,7 @@ const BiologyAdmin = () => {
 
   useEffect(() => {
     if (!userData.user) {
-      navigate("/login");
+      navigate("/adminlogin");
     } else {
       loadQuestions();
     }
@@ -100,7 +101,11 @@ const BiologyAdmin = () => {
     });
     return correctCount;
   };
-
+  const showToastMessage = () => {
+    toast.success('Successfully Deleted !', {
+        position: toast.POSITION.TOP_RIGHT
+    });
+};
   const renderQuestionPage = () => {
     const currentQuestion = questions[currentQuestionIndex];
     const handleDelete = () => {
@@ -109,6 +114,7 @@ const BiologyAdmin = () => {
         .then((response) => {
           loadQuestions()
           renderQuestionPage()
+          showToastMessage()
         })
         .catch((error) => {
           // Handle error if the delete request fails
@@ -118,7 +124,7 @@ const BiologyAdmin = () => {
     return (
       <>
         <div className="timer-container">
-         
+        <ToastContainer />
         </div>
         <div>
           <h3>Question </h3>
@@ -134,7 +140,7 @@ const BiologyAdmin = () => {
                     checked={answers[currentQuestionIndex] === "A"}
                     onChange={handleAnswerChange}
                   />
-                  <h5 className="form-check-label ">
+                  <h5 className=" ">
                     A) {currentQuestion.a}
                   </h5>
                 </div>

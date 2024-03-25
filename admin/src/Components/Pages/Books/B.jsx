@@ -5,14 +5,16 @@ import Card from 'react-bootstrap/Card';
 import Axios from '../../../Axios';
 import moment from "moment"
 import Alert from 'react-bootstrap/Alert';
+import Books from './Books';
 
 
-const B = () => {
-const axios =Axios()
-    const [data, setData] = useState([]);
-
-    const [show, setShow] = useState(false);
-    async function getBookData() {
+const B = ({books}) => {
+     const axios =Axios()
+     const [data, setData] = useState([]);
+     const [search, setSearcher] = useState("");
+     const [filterData, setFilterData] = useState([]);
+     const [show, setShow] = useState(false);
+     async function getBookData() {
         const response = await axios.get(
           "/api/books/getBooks", {
         })
@@ -39,83 +41,60 @@ const axios =Axios()
             console.log("error")
         }
     }
-console.log(data)
+    useEffect(() => {
+        setFilterData(
+          data.filter((q) =>
+            q.title.toLowerCase().includes(search.toLowerCase())
+          )
+        );
+      }, [search, data]);
     useEffect(() => {
         getBookData()
     }, [])
 
     return (
         <>
-<div className="container mt-2">
-<div class="course-feature">
-<div class="row">
-
-
-                    {
-                        data.length > 0 ? data.map((el, i) => {
-                            return (
-                                <>
-                                <div class="col-lg-4 col-md-6 d-flex">
-<div class="course-box d-flex aos" data-aos="fade-up">
-<div class="product">
-                                <div class="course-box d-flex aos" data-aos="fade-up">
-<div class="product">
-<div class="product-img">
-<a href={`http://localhost:5000/${el.pdf}`} target='_black'>
-<img style={{width: 340, height: 400 }} src={`http://localhost:5000/${el.image}`}/>
-</a>
-<div class="price">
-<h3>Free</h3>
+<section className="container mt-5">
+    <h1 className='text-center '>Course Materials</h1>
+<div className=" ">
+<div class="banner-content">
+<form class="form" action="">
+<div class="form-inner">
+<div class="input-group">
+<i class=" fa-magnifying-glass search-icon"></i>
+<input type="email" class="form-control" placeholder="Search Subject, Online eductional Materials, etc" onChange={(e) => {
+            setSearcher(e.target.value);
+          }}/>
+<span class="drop-detail">
+<select class="form-select select">
+<option>Category</option>
+<option>Biology</option>
+<option>Civics</option>
+<option>English</option>
+<option>Social Sciences</option>
+<option>Mathematics</option>
+<option>Physics</option>
+<option>Chemistry</option>
+<option>Afan Oromo</option>
+</select>
+</span>
+<button class="btn btn-primary sub-btn d-md-block d-none" type="submit"><i class=""></i></button>
 </div>
 </div>
-<div class="product-content">
-<div class="course-group d-flex">
-<div class="course-group-img d-flex">
-<div class="course-name">
-<h4>{el.title}</h4>
+</form>
 </div>
-</div>
-<div class="course-share d-flex align-items-center justify-content-center">
-<a href="#"><i class="fa-regular fa-heart"></i></a>
-</div>
-</div>
-<div class="course-info d-flex align-items-center">
-<div class="rating-img d-flex align-items-center">
-
-<p>12+ Lesson</p>
-</div>
-<div class="course-view d-flex align-items-center">
-
-<p>9hr 30min</p>
-</div>
-</div>
-<div class="rating">
-<i class="fas fa-star filled"></i>
-<i class="fas fa-star filled"></i>
-<i class="fas fa-star filled"></i>
-<i class="fas fa-star filled"></i>
-<i class="fas fa-star"></i>
-<span class="d-inline-block average-rating"><span>4.0</span> (15)</span>
-</div>
-<div class="all-btn all-category d-flex align-items-center">
-<a href={`http://localhost:5000/${el.pdf}`} class="btn btn-primary" target='_black'>For Read</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-            </div>
-            </div>
-                                </>
-                            )
-                        }) : ""
-                    }
-
-                </div>
-            </div>
-           
-            </div>
-           
+<div className='row'>
+        {filterData.length === 0 ? (
+          <div>No Result Found</div>
+        ) : (
+             filterData.map((el, i) => {
+                    return <Books b={el}/>
+                }) 
+            
+        )}
+      </div>
+      </div>
+    </section>  
         </>
     )
 }

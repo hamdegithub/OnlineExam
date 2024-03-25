@@ -18,11 +18,8 @@ const Biology = () => {
   const [score, setScore] = useState(0);
 
   useEffect(() => {
-    if (!userData.user) {
-      navigate("/login");
-    } else {
       loadQuestions();
-    }
+    
   }, [userData.user]);
 
   useEffect(() => {
@@ -211,7 +208,8 @@ const Biology = () => {
 
   return (
     <section className="container">
-      <h1 className="text-center pt-2">Grade 8 Biology Matric Exam</h1>
+    
+      <h1 className="text-center pt-2">Software Engineering Exit Exam</h1>
       {showScore ? (
         renderScorePage()
       ) : questions.length > 0 ? (

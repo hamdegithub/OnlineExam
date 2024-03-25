@@ -39,5 +39,5 @@ app.use("/api/physics", physicsRouter);
 app.use("/api/question", questionRouter);
 app.use("/api/answer", answerRouter);
 app.use("/api/answer", answerRouter);
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`)); //

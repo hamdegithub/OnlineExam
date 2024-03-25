@@ -14,7 +14,7 @@ const AdminSignin = () => {
   const [userData, setUserData] = useContext(UserContext);
   const [form, setForm] = useState({});
   const [email, setemail] = useState("");
-  const [pass, setpass] = useState("");
+  const [pass, setPass] = useState("");
   const [fname, setF] = useState("");
   const [lname, setL] = useState("");
   const [Usern, setUN] = useState("");
@@ -143,7 +143,10 @@ const AdminSignin = () => {
               }}
             />
 
-           <input className="in1" type={type} name="password" onChange={handleChange } placeholder="Your Password" />
+           <input className="in1" type={type} name="password" value={pass} onChange={(e) => {
+                setPass(e.target.value);
+                handleChange();
+              }} placeholder="Your Password" />
                <span onClick={HandleIconChange} className="showHide2">
                  <Icon icon={icon} size={20} />
               </span>

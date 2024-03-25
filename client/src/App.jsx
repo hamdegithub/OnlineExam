@@ -79,7 +79,7 @@ const App = () => {
       localStorage.setItem('auth-token', '');
       token = '';
     } else {
-      const userRes = await axios.get('http://localhost:5000/api/users', {
+      const userRes = await axios.get('http://localhost:4000/api/users', {
         headers: { 'x-auth-token': token }
       });
       // console.log(userRes);

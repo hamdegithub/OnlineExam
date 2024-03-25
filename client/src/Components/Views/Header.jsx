@@ -24,12 +24,8 @@ const Header = () => {
         <Link to='/' className="header__image">
           {/* <img src={logo} alt="Evangadi logo" /> */}
         </Link>
-        <button className='ic d-sm-block d-md-none'>
-          ☰
-        </button>
-        <div className="d-flex  innerContainer2 justify-content-between d-none d-md-block">
+        <div className="d-flex  innerContainer2 justify-content-between">
           <Link to="/">Home</Link>
-          <Link to="/about">How it Works</Link>
           <Link to="/">
           <button className="btn_header" onClick={logout}>{userData.user ? "LogOut" : "SIGN IN"}</button>
 

@@ -41,88 +41,16 @@ server/api/social/question.service.js      }
       }
     );
   },
+  deleteQuestion: (onlinequestion_id, callback) => {
+    pool.query(
+      `DELETE FROM social WHERE onlinequestion_id=?`,
+      [onlinequestion_id],
+      (err, result) => {
+        if (err) {
+          return callback(err);
+        }
+        return callback(null, result);
+      }
+    );
+  },
 };
-// const pool = require("../../config/database");
-
-// module.exports = {
-//   askQuestion: (data, callback) => {
-//     pool.query(
-//       `INSERT INTO social(qn, subject, title, a, b, c, d, answer, time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-//       [
-//         data.body.qn,
-//         data.body.subject,
-//         data.body.title,
-//         data.body.a,
-//         data.body.b,
-//         data.body.c,
-//         data.body.d,
-//         data.body.answer,
-//         new Date(),
-//       ],
-//       (err, result) => {
-//         if (err) {
-//           return callback(err);
-//         }
-//         return callback(null, result);
-//       }
-//     );
-//   },
-//   getQuestions: (callback) => {
-//     pool.query(
-//       `SELECT * FROM social ORDER BY qn`,
-//       (err, result) => {
-//         if (err) {
-//           return callback(err);
-//         }
-//         return callback(null, result);
-//       }
-//     );
-//   },
-//   getQuestionById: (socialquestion_id, callback) => {
-//     pool.query(
-//       `SELECT * FROM social WHERE socialquestion_id = ?`,
-//       [socialquestion_id],
-//       (err, result) => {
-//         if (err) {
-//           return callback(err);
-//         }
-//         return callback(null, result[0]);
-//       }
-//     );
-//   },
-//   editQuestion: (socialquestion_id, data, callback) => {
-//     pool.query(
-//       `UPDATE social SET qn = ?, subject = ?, title = ?, a = ?, b = ?, c = ?, d = ?, answer = ?, time = ? WHERE socialquestion_id = ?`,
-//       [
-//         data.body.qn,
-//         data.body.subject,
-//         data.body.title,
-//         data.body.a,
-//         data.body.b,
-//         data.body.c,
-//         data.body.d,
-//         data.body.answer,
-//         new Date(),
-//         socialquestion_id,
-//       ],
-//       (err, result) => {
-//         if (err) {
-//           return callback(err);
-//         }
-//         return callback(null, result);
-//       }
-//     );
-//   },
-//   deleteQuestion: (socialquestion_id, callback) => {
-//     pool.query(
-//       `DELETE FROM social WHERE socialquestion_id = ?`,
-//       [socialquestion_id],
-//       (err, result) => {
-//         if (err) {
-//           return callback(err);
-//         }
-//         return callback(null, result);
-//       }
-//     );
-//   },
-// };

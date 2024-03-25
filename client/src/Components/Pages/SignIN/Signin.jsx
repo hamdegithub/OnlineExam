@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './Signin.css';
 import { Link, useNavigate } from 'react-router-dom';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { UserContext } from '../../Contexts/UserContext';
 import axios from 'axios';
 import { Icon } from "react-icons-kit";
@@ -38,7 +36,7 @@ const Signin = ({ showSignIn }) => {
     e.preventDefault();
     try {
       //sending user data to database to be logged in
-      const signRes = await axios.post("http://localhost:5000/api/users/", {
+      const signRes = await axios.post("http://localhost:4000/api/users", {
         userName: Usern,
         firstName: fname,
         lastName: lname,
@@ -92,7 +90,7 @@ const Signin = ({ showSignIn }) => {
 
 
 
-<div class="col-md-6 login-wrap-bg">
+<div class="col-md-6 hello2 login-wrap-bg">
 
 <div class="login-wrapper">
 <div class="loginbox">
@@ -144,7 +142,10 @@ const Signin = ({ showSignIn }) => {
               }}
             />
 
-<input className="in1" type={type} name="password" onChange={handleChange } placeholder="Your Password" />
+<input className="in1" type={type} name="password" onChange={(e) => {
+                setpass(e.target.value);
+                handleChange();
+              }}placeholder="Your Password" />
                <span onClick={HandleIconChange} className="showHide2">
                  <Icon icon={icon} size={20} />
               </span>

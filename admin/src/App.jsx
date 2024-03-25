@@ -81,22 +81,21 @@ import Books from './Components/Pages/admin/Books/Books';
 
 const App = () => {
   const [userData, setUserData] = useContext(UserContext);
-
-  const checkLoggedIn = async () => {
+ const checkLoggedIn = async () => {
     let token = localStorage.getItem('auth-token');
     if (token === null) {
       localStorage.setItem('auth-token', '');
       token = '';
     } else {
-      const userRes = await axios.get('http://localhost:5000/api/users', {
+      const userRes = await axios.get('http://localhost:4000/api/admins', {
         headers: { 'x-auth-token': token }
       });
       // console.log(userRes);
       setUserData({
         token,
         user: {
-          id: userRes.data.data.user_id,
-          display_name: userRes.data.data.user_name
+          id: userRes.data.data.admin_id,
+          display_name: userRes.data.data.admin_name
         }
       })
     }
@@ -108,6 +107,7 @@ const App = () => {
     });
     localStorage.setItem('auth-token', '');
   };
+
   useEffect(() => {
     checkLoggedIn();
   }, []);

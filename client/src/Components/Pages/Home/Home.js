@@ -1,13 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../Contexts/UserContext";
-import QuestionDetail from "../Question/QuestionDetail";
 import Axios from "../../../Axios";
 import "./Home.css";
 import logoo from "../../Image/Web.png"
 import MainSection from "../MainSection/MainSection";
 
-const Home = () => {
+  const Home = () => {
   const [userData] = useContext(UserContext);
   const [questions, setQuestions] = useState([]);
   const navigate = useNavigate();
@@ -16,11 +15,7 @@ const Home = () => {
   const [filterData, setFilterData] = useState([]);
 
   useEffect(() => {
-    if (!userData.user) {
-      navigate("/login");
-    } else {
       loadQuestions();
-    }
   }, [userData.user,navigate]);
   
 

@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../../Contexts/UserContext";
 import Axios from "../../../../../Axios";
 import { Alert, Button, Col, Row } from "react-bootstrap";
+import { ToastContainer, toast } from 'react-toastify';
 import "../online.css"; 
+import 'react-toastify/dist/ReactToastify.css';
 const EnglishAdmin = () => {
   const [userData] = useContext(UserContext);
   const [questions, setQuestions] = useState([]);
@@ -18,10 +20,9 @@ const EnglishAdmin = () => {
 
   useEffect(() => {
     if (!userData.user) {
-      navigate("/login");
+      navigate("/adminlogin");
     } else {
       loadQuestions();
-      
     }
   }, [userData.user]);
 
@@ -61,6 +62,14 @@ const EnglishAdmin = () => {
       console.error("Error loading questions:", error);
     }
   }
+  
+  const handleUpdate = (questionId) => {
+    // Remove the deleted question from the questions array
+    const updatedQuestions = questions.filter(
+      (question) => question.onlinequestion_id !== questionId
+    );
+    setQuestions(updatedQuestions);
+  };
 
   const handleNextQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -92,14 +101,30 @@ const EnglishAdmin = () => {
     });
     return correctCount;
   };
-
+  const showToastMessage = () => {
+    toast.success('Successfully Deleted !', {
+        position: toast.POSITION.TOP_RIGHT
+    });
+};
   const renderQuestionPage = () => {
     const currentQuestion = questions[currentQuestionIndex];
-
+    const handleDelete = () => {
+      axios
+        .delete(`/api/english/deletequestion${currentQuestion.onlinequestion_id}`)
+        .then((response) => {
+          loadQuestions()
+          renderQuestionPage()
+          showToastMessage()
+        })
+        .catch((error) => {
+          // Handle error if the delete request fails
+          console.error("Error deleting question:", error);
+        });
+    };
     return (
       <>
         <div className="timer-container">
-        
+        <ToastContainer />
         </div>
         <div>
           <h3>Question </h3>
@@ -161,11 +186,18 @@ const EnglishAdmin = () => {
                     D) {currentQuestion.d}
                   </h5>
                 </div>
+
+                <div className="form-check choice">
+                  <h5 className="form-check-label">
+                    Answer:- {currentQuestion.answer}
+                  </h5>
+                </div>
               
             
           </div>
         </div>
         <div className="button-container">
+
           <Button
             variant="secondary"
             disabled={currentQuestionIndex === 0}
@@ -173,6 +205,9 @@ const EnglishAdmin = () => {
           >
             Previous
           </Button>
+          <div>
+          <Button onClick={handleDelete} variant="danger">Delete</Button>
+          {/* <Button  variant="blue" >Edit</Button> */}
           {currentQuestionIndex === questions.length - 1 ? (
             <Button
               variant="primary"
@@ -185,7 +220,9 @@ const EnglishAdmin = () => {
             <Button variant="primary" onClick={handleNextQuestion}>
               Next
             </Button>
+            
           )}
+          </div>
         </div>
       </>
     );
